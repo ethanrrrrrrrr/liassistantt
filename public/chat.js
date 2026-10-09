@@ -22,8 +22,12 @@ let isProcessing = false;
 
 // Auto-resize textarea as user types
 userInput.addEventListener("input", function () {
-	this.style.height = "auto";
-	this.style.height = this.scrollHeight + "px";
+    const cursorPosition = this.selectionStart;
+
+    this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";
+
+    this.setSelectionRange(cursorPosition, cursorPosition);
 });
 
 // Send message on Enter (without Shift)
