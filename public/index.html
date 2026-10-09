@@ -163,12 +163,19 @@
 			</div>
 
 			<div class="message-input">
-				<textarea
-					id="user-input"
-					placeholder="Type your message here..."
-					rows="1"
-					autofocus
-				></textarea>
+				````html
+<textarea
+  id="user-input"
+  placeholder="Écris ton message à Lia..."
+  rows="1"
+  enterkeyhint="send"
+  autocorrect="on"
+  autocomplete="off"
+  autocapitalize="sentences"
+  spellcheck="true"
+></textarea>```
+````
+
 				<button id="send-button">Send</button>
 			</div>
 		</div>
