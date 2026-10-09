@@ -20,15 +20,10 @@ let chatHistory = [
 ];
 let isProcessing = false;
 
-// Auto-resize textarea as user types
-userInput.addEventListener("input", function () {
-    const cursorPosition = this.selectionStart;
+```javascript
+// Keep the text area stable while typing on mobile
+```
 
-    this.style.height = "auto";
-    this.style.height = this.scrollHeight + "px";
-
-    this.setSelectionRange(cursorPosition, cursorPosition);
-});
 
 // Send message on Enter (without Shift)
 userInput.addEventListener("keydown", function (e) {
