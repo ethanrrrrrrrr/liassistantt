@@ -20,9 +20,7 @@ let chatHistory = [
 ];
 let isProcessing = false;
 
-```javascript
-// Keep the text area stable while typing on mobile
-```
+// Auto-resize disabled to avoid mobile cursor jumps
 
 
 // Send message on Enter (without Shift)
