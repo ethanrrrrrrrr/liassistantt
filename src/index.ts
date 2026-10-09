@@ -4,7 +4,8 @@
  */
 import { Env, ChatMessage } from "./types";
 
-const MODEL_ID = "@cf/meta/llama-3.1-8b-instruct-fp8";
+const TEXT_MODEL_ID = "@cf/meta/llama-3.1-8b-instruct-fp8";
+const VISION_MODEL_ID = "@cf/meta/llama-3.2-11b-vision-instruct";
 const MAX_IMAGE_LENGTH = 7_000_000;
 
 const SYSTEM_PROMPT = `
