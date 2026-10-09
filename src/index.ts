@@ -91,20 +91,28 @@ async function handleChatRequest(
       });
     }
 
-    const inputs = {
-      messages,
-      ...(typeof image === "string" ? { image } : {}),
-      max_tokens: 1024,
-      stream: true as const,
-    } satisfies AiTextGenerationInput & {
-      image?: string;
-      stream: true;
-    };
+    let stream: ReadableStream;
 
-    const stream = await env.AI.run<typeof MODEL_ID>(
-      MODEL_ID,
-      inputs,
-    );
+if (typeof image === "string") {
+  stream = await env.AI.run<typeof VISION_MODEL_ID>(
+    VISION_MODEL_ID,
+    {
+      messages,
+      image,
+      max_tokens: 1024,
+      stream: true,
+    },
+  );
+} else {
+  stream = await env.AI.run<typeof TEXT_MODEL_ID>(
+    TEXT_MODEL_ID,
+    {
+      messages,
+      max_tokens: 1024,
+      stream: true,
+    },
+  );
+}
 
     return new Response(stream, {
       headers: {
