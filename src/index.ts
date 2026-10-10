@@ -90,16 +90,56 @@ async function handleChatRequest(
 
     let stream: ReadableStream;
 
+    
+    let stream: ReadableStream;
+
     if (typeof image === "string") {
-      stream = await env.AI.run<typeof VISION_MODEL_ID>(
+      const base64 = image.slice(image.indexOf(",") + 1);
+      const binary = atob(base64);
+      const bytes = new Uint8Array(binary.length);
+
+      for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+
+      const lastMessage = [...messages]
+        .reverse()
+        .find((message) => message.role === "user");
+
+      const prompt =
+        typeof lastMessage?.content === "string"
+          ? lastMessage.content
+          : "Décris cette image en français.";
+
+      const result = await env.AI.run<typeof VISION_MODEL_ID>(
         VISION_MODEL_ID,
         {
-          messages,
-          image,
+          prompt,
+          image: [...bytes],
           max_tokens: 1024,
-          stream: true,
         },
       );
+
+      const answer =
+        typeof result === "object" &&
+        result !== null &&
+        "description" in result
+          ? String(result.description)
+          : JSON.stringify(result);
+
+      stream = new ReadableStream({
+        start(controller) {
+          controller.enqueue(
+            new TextEncoder().encode(
+              `data: ${JSON.stringify({ response: answer })}\n\n`,
+            ),
+          );
+          controller.enqueue(
+            new TextEncoder().encode("data: [DONE]\n\n"),
+          );
+          controller.close();
+        },
+      });
     } else {
       stream = await env.AI.run<typeof TEXT_MODEL_ID>(
         TEXT_MODEL_ID,
