@@ -242,7 +242,29 @@
         transition-duration: 0.01ms !important;
       }
     }
-  </style>
+ 
+    .message-actions {
+      display: flex;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .copy-message-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--panel);
+      color: var(--text);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .copy-message-button:hover {
+      background: var(--accent);
+    } </style>
 </head>
 <body data-theme="dark">
   <div class="app-shell">
