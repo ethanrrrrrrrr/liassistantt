@@ -382,8 +382,31 @@ async function sendMessage() {
   try {
     const assistantMessageEl = document.createElement("div");
     assistantMessageEl.className = "message assistant-message";
+    
     const paragraph = document.createElement("p");
     assistantMessageEl.appendChild(paragraph);
+
+    const actions = document.createElement("div");
+    actions.className = "message-actions";
+
+    const copyButton = document.createElement("button");
+    copyButton.type = "button";
+    copyButton.className = "copy-message-button";
+    copyButton.textContent = "📋 Copier";
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(paragraph.textContent || "");
+        copyButton.textContent = "✓ Copié !";
+        setTimeout(() => {
+          copyButton.textContent = "📋 Copier";
+        }, 1500);
+      } catch (error) {
+        copyButton.textContent = "Copie impossible";
+      }
+    });
+
+    actions.appendChild(copyButton);
+    assistantMessageEl.appendChild(actions);
     chatMessages.appendChild(assistantMessageEl);
     assistantTextEl = paragraph;
 
