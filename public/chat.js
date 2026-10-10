@@ -159,9 +159,11 @@ function updateConversationTitle(message) {
 function addMessageToChat(role, content, scroll = true, imageDataUrl = null) {
   const messageEl = document.createElement("div");
   messageEl.className = `message ${role}-message`;
+
   const paragraph = document.createElement("p");
   paragraph.textContent = content;
   messageEl.appendChild(paragraph);
+
   if (role === "user" && imageDataUrl) {
     const image = document.createElement("img");
     image.className = "message-image";
@@ -169,6 +171,36 @@ function addMessageToChat(role, content, scroll = true, imageDataUrl = null) {
     image.alt = "Photo jointe à ce message";
     messageEl.appendChild(image);
   }
+
+  if (role === "assistant") {
+    const copyButton = document.createElement("button");
+    copyButton.type = "button";
+    copyButton.className = "copy-message-button";
+    copyButton.textContent = "📋 Copier";
+
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(paragraph.textContent);
+        copyButton.textContent = "✅ Copié !";
+        setTimeout(() => {
+          copyButton.textContent = "📋 Copier";
+        }, 1500);
+      } catch (error) {
+        copyButton.textContent = "❌ Copie impossible";
+      }
+    });
+
+    messageEl.appendChild(copyButton);
+  }
+
+  chatMessages.appendChild(messageEl);
+
+  if (scroll) {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  return messageEl;
+}
  
   chatMessages.appendChild(messageEl);
 
