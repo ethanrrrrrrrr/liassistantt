@@ -124,8 +124,6 @@ async function handleChatRequest(
       });
     }
 
-    let stream: ReadableStream;
-
     
     let stream: ReadableStream;
 
