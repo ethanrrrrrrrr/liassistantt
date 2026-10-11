@@ -92,8 +92,6 @@ const SYSTEM_PROMPT = [
   "Vérifie la logique de ta réponse.",
   "Privilégie une solution correcte, concrète et adaptée plutôt qu'une réponse simplement convaincante."
 ].join("\n");
-```
-
 
 export default {
   async fetch(
