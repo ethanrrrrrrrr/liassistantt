@@ -124,7 +124,6 @@ async function handleChatRequest(
       });
     }
 
-    
     let stream: ReadableStream;
 
     if (typeof image === "string") {
