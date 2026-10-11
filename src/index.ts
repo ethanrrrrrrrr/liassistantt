@@ -124,7 +124,6 @@ async function handleChatRequest(
         content: SYSTEM_PROMPT,
       });
     }
-
     -let stream: ReadableStream;
 
     if (typeof image === "string") {
