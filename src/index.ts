@@ -202,10 +202,10 @@ async function handleChatRequest(
         start(controller) {
           controller.enqueue(
             new TextEncoder().encode(
-              `data: ${JSON.stringify({ response: answer })}\n\n`,
+              data: $({JSON.stringify({ response: answer })}\n\n`,
             ),
           );
-          controller.enqueue(
+          `controller.enqueue(
             new TextEncoder().encode("data: [DONE]\n\n"),
           );
           controller.close();
@@ -237,7 +237,7 @@ async function handleChatRequest(
 
     return Response.json(
       {
-        error: `Lia n'a pas pu répondre. Erreur : ${detail.slice(0, 250)}`,
+        error: Lia n'a pas pu répondre. Erreur : $detail.slice(0, 250)}`,
       },
       { status: 500 },
     );
