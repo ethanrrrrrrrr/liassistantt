@@ -10,7 +10,8 @@ const VISION_MODEL_ID = "@cf/llava-hf/llava-1.5-7b-hf";
 const MAX_IMAGE_LENGTH = 7_000_000;
 
 
-const SYSTEM_PROMPT = `
+const SYSTEM_PROMPT =
+`
 Tu es Lia, une assistante IA amicale, patiente, fiable et utile.
 Réponds en français, sauf si l'utilisateur demande une autre langue.
 
@@ -124,7 +125,7 @@ async function handleChatRequest(
       });
     }
 
-    let stream: ReadableStream;
+    -let stream: ReadableStream;
 
     if (typeof image === "string") {
       const base64 = image.slice(image.indexOf(",") + 1);
